@@ -1,4 +1,4 @@
-from potion.html_tag import HTMLTagBuilder
+from potion.html_tag import HTMLTagBuilder, TAG
 from bs4 import BeautifulSoup
 
 
@@ -21,6 +21,11 @@ class HTMLDocBuilder:
     def add_title(self, title):
         title_tag = HTMLTagBuilder("title", children=title)
         self.head.add_child(title_tag)
+
+    def add_stylesheet(self, href):
+        self.add_to_head(TAG.link(rel="stylesheet",
+                                  href=href,
+                                  type="text/css"))
 
     def add_to_head(self, html_tag: HTMLTagBuilder):
         self.head.add_child(html_tag)

@@ -1,7 +1,7 @@
 import pytest
-from flask import url_for
 from potion.html_doc import HTMLDocBuilder
 from potion.html_tag import TAG
+from potion.styles import CSSBlock
 from bs4 import BeautifulSoup
 
 
@@ -28,13 +28,20 @@ def test_basic_page_from_flask(app):
 
 
 @pytest.mark.active
-def test_second_page_from_flask(app):
+def test_page_with_global_css(app):
     page_title = "LIVE PAGE TEST 2"
+
+    @app.route("/static/global.css")
+    def test_css():
+        def build_css():
+            return CSSBlock(".test-class", color="red").build()
+        return app.response_class(build_css(), mimetype="text/css")
 
     @app.route("/")
     def test_page():
         page = HTMLDocBuilder(page_title)
-        page.add_to_body(TAG.p("Test a second page"))
+        page.add_to_body(TAG.p("This is a paragraph", html_class="test-class"))
+        page.add_stylesheet("/static/global.css")
         return page.build()
 
     client = app.test_client()
