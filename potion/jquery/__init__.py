@@ -2,6 +2,7 @@ import typing
 
 from .jquery import JQueryFunctionBuilder, JQuerySelector
 from .hide import jquery_hide_partial
+from .show import jquery_show_partial
 
 
 class JQuery:
@@ -21,3 +22,4 @@ class JQuery:
 
     # JQuery Function Partials, requiring source-selector + event-name
     hide = jquery_hide_partial
+    show = jquery_show_partial

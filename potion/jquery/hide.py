@@ -1,9 +1,9 @@
-from .jquery import JQueryFunctionBuilder, JQueryAction, JQuerySelector
+from .jquery import JQueryFunctionBuilder, JQueryAction
 
 
 class JQueryHide(JQueryFunctionBuilder):
 
-    def __init__(self, event:str, source:str, target:str):
+    def __init__(self, event: str, source: str, target: str):
         super().__init__(event, source)
         self.steps = [JQueryAction(target_selector=target,
                                    jqeuery_action="hide")]
