@@ -15,3 +15,10 @@ class Driver:
 
     def find_by_css(self, css_selector_str):
         return self.driver.find_elements(By.CSS_SELECTOR, css_selector_str)
+
+    def find_by_id(self, id):
+        return self.driver.find_element(By.ID, id)
+
+    def click(self, id):
+        element = self.find_by_id(id)
+        element.click()

@@ -1,6 +1,8 @@
 class HTMLTagBuilder:
+    __slots__ = ("name", "is_container", "children", "html_class", "id", "xml_prop_names")
 
-    def __init__(self, name, is_container=True, children=None, id=None, html_class=None):
+    def __init__(self, name, is_container=True, children=None, id=None,
+                 html_class=None, **kwargs):
         self.name = name
         self.is_container = is_container
         if isinstance(children, str):

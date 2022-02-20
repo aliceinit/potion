@@ -12,13 +12,14 @@ def test_basic_page_from_flask(app):
     @app.route("/")
     def test_page():
         page = HTMLDocBuilder(page_title)
-        page.add_tags([
-            TAG.p(["paragraph: ",
-                   TAG.em(["the very first"]),
-                   " paragraph"]),
+        page.add_to_body(
+            TAG.p("paragraph: ",
+                  TAG.em("the very first"),
+                  " paragraph"),
             TAG.br(),
             TAG.p("paragraph 2"),
-            TAG.hr()])
+            TAG.hr()
+        )
         return page.build()
 
     client = app.test_client()
@@ -35,6 +36,7 @@ def test_page_with_global_css(app):
     def test_css():
         def build_css():
             return CSSBlock(".test-class", color="red").build()
+
         return app.response_class(build_css(), mimetype="text/css")
 
     @app.route("/")

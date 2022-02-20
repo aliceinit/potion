@@ -15,11 +15,11 @@ def test_basic_empty_page():
 @pytest.mark.active
 def test_empty_tags():
     page = HTMLDocBuilder("test_empty_tags")
-    page.add_tags([
+    page.add_to_body(
         TAG.p(["paragraph: ",
                TAG.em(["the very first"]),
                " paragraph"]),
         TAG.br(),
         TAG.p("paragraph 2"),
         TAG.hr()
-    ])
+    )

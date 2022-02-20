@@ -27,12 +27,11 @@ class HTMLDocBuilder:
                                   href=href,
                                   type="text/css"))
 
-    def add_to_head(self, html_tag: HTMLTagBuilder):
-        self.head.add_child(html_tag)
+    def add_to_head(self, *children):
+        for child in children:
+            self.head.add_child(child)
 
-    def add_to_body(self, html_tag: HTMLTagBuilder):
-        self.body.add_child(html_tag)
+    def add_to_body(self, *children):
+        for child in children:
+            self.body.add_child(child)
 
-    def add_tags(self, html_tags: list):
-        for tag in html_tags:
-            self.add_to_body(tag)
