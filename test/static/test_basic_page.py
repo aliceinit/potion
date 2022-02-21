@@ -1,6 +1,6 @@
 import pytest
 from potion.html_doc import HTMLDocBuilder
-from potion.html_tag import TAG
+from potion.html_tag import Tag
 from bs4 import BeautifulSoup
 
 
@@ -16,10 +16,10 @@ def test_basic_empty_page():
 def test_empty_tags():
     page = HTMLDocBuilder("test_empty_tags")
     page.add_to_body(
-        TAG.p(["paragraph: ",
-               TAG.em(["the very first"]),
+        Tag.P(["paragraph: ",
+               Tag.EM(["the very first"]),
                " paragraph"]),
-        TAG.br(),
-        TAG.p("paragraph 2"),
-        TAG.hr()
+        Tag.BR(),
+        Tag.P("paragraph 2"),
+        Tag.HR()
     )

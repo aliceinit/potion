@@ -1,6 +1,6 @@
 import pytest
 from potion.html_doc import HTMLDocBuilder
-from potion.html_tag import TAG
+from potion.html_tag import Tag
 from potion.styles import CSSBlock
 from bs4 import BeautifulSoup
 
@@ -13,12 +13,12 @@ def test_basic_page_from_flask(app):
     def test_page():
         page = HTMLDocBuilder(page_title)
         page.add_to_body(
-            TAG.p("paragraph: ",
-                  TAG.em("the very first"),
+            Tag.P("paragraph: ",
+                  Tag.EM("the very first"),
                   " paragraph"),
-            TAG.br(),
-            TAG.p("paragraph 2"),
-            TAG.hr()
+            Tag.BR(),
+            Tag.P("paragraph 2"),
+            Tag.HR()
         )
         return page.build()
 
@@ -42,7 +42,7 @@ def test_page_with_global_css(app):
     @app.route("/")
     def test_page():
         page = HTMLDocBuilder(page_title)
-        page.add_to_body(TAG.p("This is a paragraph", html_class="test-class"))
+        page.add_to_body(Tag.P("This is a paragraph", html_class="test-class"))
         page.add_stylesheet("/static/global.css")
         return page.build()
 

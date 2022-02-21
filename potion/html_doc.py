@@ -1,4 +1,4 @@
-from potion.html_tag import HTMLTagBuilder, TAG
+from potion.html_tag import HTMLTagBuilder, Tag
 from potion.jquery import JQuery, JQueryFunctionBuilder
 from bs4 import BeautifulSoup
 
@@ -7,10 +7,11 @@ class HTMLDocBuilder:
     def __init__(self, title=None):
         self.head = HTMLTagBuilder("head")
         self.body = HTMLTagBuilder("body")
+        self.functions = []
 
         if title:
             self.add_title(title)
-        self.add_to_head(TAG.script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"))
+        self.add_to_head(Tag.SCRIPT(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"))
 
     def build(self):
         # Build body and collect attached jquery and styles
@@ -18,8 +19,8 @@ class HTMLDocBuilder:
 
         # Add jquery to document_ready function
         document_ready_fn: JQueryFunctionBuilder = JQuery.document_ready()
-        document_ready_fn.add_steps(*functions_by_id)
-        self.add_to_head(TAG.script(document_ready_fn.build()))
+        document_ready_fn.add_steps(*self.functions, *functions_by_id)
+        self.add_to_head(Tag.SCRIPT(document_ready_fn.build()))
 
         # Build head
         head_content, _, _ = self.head.build()
@@ -39,9 +40,12 @@ class HTMLDocBuilder:
         self.head.add_child(title_tag)
 
     def add_stylesheet(self, href):
-        self.add_to_head(TAG.link(rel="stylesheet",
+        self.add_to_head(Tag.LINK(rel="stylesheet",
                                   href=href,
                                   type="text/css"))
+
+    def add_function(self, source: str, event: str, jquery_partial=JQueryFunctionBuilder):
+        self.functions.append(jquery_partial(event, source))
 
     def add_to_head(self, *children):
         for child in children:

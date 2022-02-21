@@ -1,5 +1,5 @@
 from flask import Blueprint, url_for
-from potion.html_tag import TAG
+from potion.html_tag import Tag
 from potion.html_doc import HTMLDocBuilder
 from test_utils.driver import Driver
 
@@ -11,11 +11,11 @@ test_url = "/test/css/global_css/"
 def dashboard():
     doc = HTMLDocBuilder(title="Testing Global CSS")
     doc.add_to_body(
-        TAG.p("This paragraph is red and white",
+        Tag.P("This paragraph is red and white",
               html_class="global-colour",
               id="first-paragraph"),
-        TAG.em(TAG.p("another paragraph, emphasized"),
-               TAG.p("and another"))
+        Tag.EM(Tag.P("another paragraph, emphasized"),
+               Tag.P("and another"))
     )
     doc.add_stylesheet(href=url_for("static", filename="styles.css"))
     return doc.build()

@@ -10,21 +10,21 @@ from .emphasis import HTMLEmphasis
 from .lists import HTMLOrderedList, HTMLUnorderedList, HTMLListItem
 
 
-class TAG:
+class Tag:
     # Empty Tags
-    br = HTMLLineBreak
-    hr = HTMLHorizontalRule
-    link = HTMLLink
+    BR = HTMLLineBreak
+    HR = HTMLHorizontalRule
+    LINK = HTMLLink
 
     # Container Tags
-    a = HTMLHyperlink
-    p = HTMLParagraph
-    em = HTMLEmphasis
-    div = HTMLDivision
-    script = HTMLScript
-    button = HTMLButton
+    A = HTMLHyperlink
+    P = HTMLParagraph
+    EM = HTMLEmphasis
+    DIV = HTMLDivision
+    SCRIPT = HTMLScript
+    BUTTON = HTMLButton
 
     # Lists
-    ol = HTMLOrderedList
-    ul = HTMLUnorderedList
-    li = HTMLListItem
+    OL = HTMLOrderedList
+    UL = HTMLUnorderedList
+    LI = HTMLListItem

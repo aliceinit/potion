@@ -1,5 +1,5 @@
 from flask import Blueprint, url_for
-from potion.html_tag import TAG
+from potion.html_tag import Tag
 from potion.html_doc import HTMLDocBuilder
 from test_utils.driver import Driver
 
@@ -11,7 +11,7 @@ test_urls = ["/test/hyperlink/source", "/test/hyperlink/dest"]
 def source():
     doc = HTMLDocBuilder(title="Testing Global CSS")
     doc.add_to_body(
-        TAG.a("link text",
+        Tag.A("link text",
               href=test_urls[1],
               id="link"),
     )
@@ -22,12 +22,12 @@ def source():
 def destination():
     doc = HTMLDocBuilder(title="Hyperlink Destination")
     doc.add_to_body(
-        TAG.p("DONE", id="done")
+        Tag.P("DONE", id="done")
     )
     return doc.build()
 
 
 def test_pass_static_css_to_page_builder(_driver: Driver):
     _driver.navigate(test_urls[0])
-    _driver.click("link")
+    _driver.click("#link")
     assert _driver.find_by_id("done") is not None

@@ -21,6 +21,7 @@ class Driver:
     def find_by_id(self, id):
         return self.driver.find_element(By.ID, id)
 
-    def click(self, id):
-        element = self.find_by_id(id)
-        element.click()
+    def click(self, css_selector_str):
+        elements = self.find_by_css(css_selector_str)
+        if elements:
+            elements[0].click()

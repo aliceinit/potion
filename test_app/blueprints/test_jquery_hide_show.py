@@ -1,11 +1,11 @@
 from flask import Blueprint, url_for
-from potion.html_tag import TAG
+from potion.html_tag import Tag
 from potion.html_doc import HTMLDocBuilder
 from potion.jquery import JQuery
 from test_utils.driver import Driver
 import time
 
-test_api = Blueprint("test-ajax-load-content", __name__)
+test_api = Blueprint("test-ajax-show-hide", __name__)
 test_url = "/test/ajax/load-content/"
 
 
@@ -14,18 +14,18 @@ def dashboard():
     doc = HTMLDocBuilder(title="Testing JQuery Hide & Show Functions")
 
     doc.add_to_body(
-        TAG.p("A paragraph"),
-        TAG.p("Another paragrry-slowaph"),
-        TAG.button("hide paragraphs",
+        Tag.P("A paragraph"),
+        Tag.P("Another paragrry-slowaph"),
+        Tag.BUTTON("hide paragraphs",
                    id="hide-button",
                    on_click=JQuery.hide("p")),
-        TAG.button("show paragraphs",
+        Tag.BUTTON("show paragraphs",
                    id="show-button",
                    on_click=JQuery.show("p")),
-        TAG.button("hide very slowly",
+        Tag.BUTTON("hide very slowly",
                    id="hide-very-slow",
                    on_click=JQuery.hide("p", speed=2000)),
-        TAG.button("show fast",
+        Tag.BUTTON("show fast",
                    id="show-fast",
                    on_click=JQuery.show("p", speed="fast"))
     )
@@ -42,10 +42,10 @@ def test_jquery_hide_show_elements(_driver: Driver):
     _driver.navigate(test_url)
     assert len(get_visible_paragraphs(_driver)) == 2
 
-    _driver.click("hide-button")
+    _driver.click("#hide-button")
     assert len(get_visible_paragraphs(_driver)) == 0
 
-    _driver.click("show-button")
+    _driver.click("#show-button")
     assert len(get_visible_paragraphs(_driver)) == 2
 
 
@@ -53,10 +53,10 @@ def test_jquery_hide_show_with_speed(_driver: Driver):
     _driver.navigate(test_url)
     assert len(get_visible_paragraphs(_driver)) == 2
 
-    _driver.click("hide-very-slow")
+    _driver.click("#hide-very-slow")
     assert len(get_visible_paragraphs(_driver)) == 2
     time.sleep(2)
     assert len(get_visible_paragraphs(_driver)) == 0
 
-    _driver.click("show-fast")
+    _driver.click("#show-fast")
     assert len(get_visible_paragraphs(_driver)) == 2
