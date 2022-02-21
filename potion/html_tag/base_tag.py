@@ -79,4 +79,3 @@ class HTMLTagBuilder:
 
     def on_click(self, partial_fn):
         self.functions.append(partial_fn("click", f"#{self.id}"))
-        print(self.functions)

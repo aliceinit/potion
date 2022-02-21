@@ -2,7 +2,7 @@ import typing
 
 
 class JQuerySelector:
-    reserved= ["this", "document"]
+    reserved = ["this", "document"]
 
     @classmethod
     def from_string(cls, selector: str) -> str:
@@ -13,13 +13,25 @@ class JQuerySelector:
 
 
 class JQueryAction:
-    def __init__(self, target_selector: str, jqeuery_action: str, *args):
+    supported_actions = ["show", "hide"]
+
+    def __init__(self, target_selector: str,
+                 jquery_action: str,
+                 *args):
+
+        if jquery_action not in self.supported_actions:
+            raise AttributeError(f"Invalid JQuery action: {jquery_action}")
+
         self.target = JQuerySelector.from_string(target_selector)
-        self.action = jqeuery_action
+        self.action = jquery_action
         self.args = args
 
     def build(self):
-        return f"$({self.target}).{self.action}({self.args if self.args else ''})"
+        if self.args:
+            args = ', '.join([str(a) for a in self.args])
+        else:
+            args = ''
+        return f"$({self.target}).{self.action}({args})"
 
 
 class JQueryFunctionBuilder:
@@ -32,17 +44,24 @@ class JQueryFunctionBuilder:
     def add_steps(self, *steps: typing.Union["JQueryFunctionBuilder",
                                              JQueryAction]):
         for step in steps:
-            print(f"Adding step {step}")
             self.steps.append(step)
 
     def add_jquery_action(self, target, action, *args):
         self.add_steps(JQueryAction(target, action, *args))
 
+    @staticmethod
+    def format_speed_arg(speed):
+        if speed:
+            if speed in ["slow", "fast"]:
+                return f'"{speed}"'
+            elif isinstance(speed, int):
+                return speed
+            else:
+                raise AttributeError(f"Invalid option {speed} for speed. Must be 'slow', 'fast' or milliseconds (int)")
+
     def build(self):
         fn = f"$({self.source}).{self.event}(function(){{"
-        print(f"all steps: {self.steps}")
         for step in self.steps:
-            print(f"{type(step)}: -- {step}")
             fn += step.build()
         fn += "});"
         return fn
