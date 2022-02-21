@@ -79,8 +79,11 @@ class HTMLTagBuilder:
     def add_child(self, child):
         self.children.append(child)
 
-    def add_style(self, **kwargs):
-        self.styles.append(CSSBlock(f"#{self.id}", **kwargs))
+    def add_style(self, selector=None, **kwargs):
+        block_selector = f"#{self.id}"
+        if selector:
+            block_selector += f" {selector}"
+        self.styles.append(CSSBlock(block_selector, **kwargs))
 
     def on_click(self, partial_fn):
         self.functions.append(partial_fn("click", f"#{self.id}"))
