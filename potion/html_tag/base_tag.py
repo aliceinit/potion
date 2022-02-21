@@ -1,6 +1,5 @@
 import random
 import string
-from potion.jquery.jquery import JQuerySelector
 
 
 class HTMLTagBuilder:

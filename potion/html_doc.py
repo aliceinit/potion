@@ -1,5 +1,6 @@
 from potion.html_tag import HTMLTagBuilder, Tag
 from potion.jquery import JQuery, JQueryFunctionBuilder
+from potion.styles import CSSBlock
 from bs4 import BeautifulSoup
 
 
@@ -8,7 +9,7 @@ class HTMLDocBuilder:
         self.head = HTMLTagBuilder("head")
         self.body = HTMLTagBuilder("body")
         self.functions = []
-
+        self.styles = []
         if title:
             self.add_title(title)
         self.add_to_head(Tag.SCRIPT(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"))
@@ -21,6 +22,10 @@ class HTMLDocBuilder:
         document_ready_fn: JQueryFunctionBuilder = JQuery.document_ready()
         document_ready_fn.add_steps(*self.functions, *functions_by_id)
         self.add_to_head(Tag.SCRIPT(document_ready_fn.build()))
+
+        # Add css statements to styles in head
+        self.add_to_head(Tag.STYLE("\n".join(style.build() for style in
+                                             self.styles + styles_by_id)))
 
         # Build head
         head_content, _, _ = self.head.build()
@@ -46,6 +51,9 @@ class HTMLDocBuilder:
 
     def add_function(self, source: str, event: str, jquery_partial=JQueryFunctionBuilder):
         self.functions.append(jquery_partial(event, source))
+
+    def add_style(self, css: CSSBlock):
+        self.styles.append(css)
 
     def add_to_head(self, *children):
         for child in children:
