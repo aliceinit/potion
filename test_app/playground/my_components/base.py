@@ -11,7 +11,6 @@ def get_doc_builder(title):
             "body",
             font_family="'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
             background_size="cover",
-            color="red",
             padding=0,
             margin=0,
             display="flex",

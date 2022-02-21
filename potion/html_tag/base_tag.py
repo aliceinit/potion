@@ -1,5 +1,6 @@
 import random
 import string
+from potion.styles import CSSBlock
 
 
 class HTMLTagBuilder:
@@ -7,7 +8,7 @@ class HTMLTagBuilder:
                  "functions", "styles")
 
     def __init__(self, name, is_container=True, children=None, id=None,
-                 html_class=None, on_click=None, **kwargs):
+                 html_class=None, style=None, on_click=None, **kwargs):
         self.name = name
         self.is_container = is_container
         self.functions = []
@@ -29,6 +30,8 @@ class HTMLTagBuilder:
 
         self.id = id or (self.name + "-" + "".join([random.choice(string.ascii_letters) for _ in range(10)]))
         self.xml_prop_names = []
+        if style:
+            self.add_style(**style)
         if on_click:
             self.on_click(on_click)
 
@@ -75,6 +78,9 @@ class HTMLTagBuilder:
 
     def add_child(self, child):
         self.children.append(child)
+
+    def add_style(self, **kwargs):
+        self.styles.append(CSSBlock(f"#{self.id}", **kwargs))
 
     def on_click(self, partial_fn):
         self.functions.append(partial_fn("click", f"#{self.id}"))
