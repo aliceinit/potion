@@ -9,17 +9,10 @@ def get_doc_builder(title):
     """Set up global defaults for my app"""
     doc = HTMLDocBuilder(title=title)
     doc.add_favicon(href=url_for("static", filename=Theme.favicon_filename))
-    doc.add_style(
-        CSSBlock(
-            "body",
-            font_family="'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
-            background_size="cover",
-            padding=0,
-            margin=0,
-            display="flex",
-            flex_direction="column"
-        )
-    )
+    doc.add_style("body",
+                  font_family="'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+                  padding=0,
+                  margin=0)
     return doc
 
 

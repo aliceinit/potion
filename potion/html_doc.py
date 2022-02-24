@@ -57,8 +57,8 @@ class HTMLDocBuilder:
     def add_function(self, source: str, event: str, jquery_partial=JQueryFunctionBuilder):
         self.functions.append(jquery_partial(event, source))
 
-    def add_style(self, css: CSSBlock):
-        self.styles.append(css)
+    def add_style(self, selector, **kwargs):
+        self.styles.append(CSSBlock(selector, **kwargs))
 
     def add_to_head(self, *children):
         for child in children:

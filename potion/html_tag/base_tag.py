@@ -79,7 +79,9 @@ class HTMLTagBuilder:
 
     def add_style(self, selector=None, **kwargs):
         block_selector = f"#{self.id}"
-        if selector:
+        if selector and selector.startswith(":"):
+            block_selector += selector
+        elif selector:
             block_selector += f" {selector}"
         self.styles.append(CSSBlock(block_selector, **kwargs))
 

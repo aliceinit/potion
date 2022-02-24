@@ -5,12 +5,12 @@ class Colors:
     PRIMARY_MAIN = "#67B600"
     PRIMARY_LIGHT = "#DCEEC8"
     PRIMARY_DARK = "#437600"
-    ACCENT_A_MAIN = ""
-    ACCENT_A_DARK = ""
-    ACCENT_A_LIGHT = ""
-    ACCENT_B_MAIN = ""
-    ACCENT_B_DARK = ""
-    ACCENT_B_LIGHT = ""
+    ACCENT_A_MAIN = "#FF6200"
+    ACCENT_A_DARK = "#CB4E00"
+    ACCENT_A_LIGHT = "#FFD7BE"
+    ACCENT_B_MAIN = "#FF3268"
+    ACCENT_B_DARK = "#BF0235"
+    ACCENT_B_LIGHT = "#FFBECF"
 
 
 class Theme:
