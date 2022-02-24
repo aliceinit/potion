@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, url_for
 from potion.html_tag import Tag
 
 from .my_components.base import get_doc_with_header

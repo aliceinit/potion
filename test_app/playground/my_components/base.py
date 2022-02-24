@@ -1,3 +1,5 @@
+from flask import url_for
+from .theme import Theme
 from potion.html_doc import HTMLDocBuilder
 from potion.styles import CSSBlock
 from .header import get_page_header
@@ -6,6 +8,7 @@ from .header import get_page_header
 def get_doc_builder(title):
     """Set up global defaults for my app"""
     doc = HTMLDocBuilder(title=title)
+    doc.add_favicon(href=url_for("static", filename=Theme.favicon_filename))
     doc.add_style(
         CSSBlock(
             "body",

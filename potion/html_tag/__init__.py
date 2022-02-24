@@ -4,6 +4,7 @@ from .division import HTMLDivision
 from .links import HTMLLink, HTMLHyperlink
 from .headers import HTMLHeading1, HTMLHeading2, HTMLHeading3, HTMLHeading4, HTMLHeading5, HTMLHeading6
 from .horizontal_rule import HTMLHorizontalRule
+from .image import HTMLImage
 from .line_break import HTMLLineBreak
 from .paragraph import HTMLParagraph
 from .script import HTMLScript
@@ -26,6 +27,7 @@ class Tag:
     SCRIPT = HTMLScript
     BUTTON = HTMLButton
     STYLE = HTMLStyle
+    IMAGE = HTMLImage
 
     # Lists
     OL = HTMLOrderedList

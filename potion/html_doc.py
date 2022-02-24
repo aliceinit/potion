@@ -49,6 +49,11 @@ class HTMLDocBuilder:
                                   href=href,
                                   type="text/css"))
 
+    def add_favicon(self, href):
+        self.add_to_head(Tag.LINK(rel="icon",
+                                  type="image/x-icon",
+                                  href=href))
+
     def add_function(self, source: str, event: str, jquery_partial=JQueryFunctionBuilder):
         self.functions.append(jquery_partial(event, source))
 

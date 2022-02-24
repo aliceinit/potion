@@ -33,6 +33,6 @@ def test_pages():
 
     return doc.build()
 
+
 if __name__ == "__main__":
     app.run()
-    # url_for('static', filename='styles.css')
