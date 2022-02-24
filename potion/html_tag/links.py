@@ -17,7 +17,6 @@ class HTMLLink(HTMLTagBuilder):
                   "prev",
                   "search",
                   "stylesheet"]
-    __slots__ = ("type", "href", "rel")
 
     def __init__(self, *children, **kwargs):
         self.rel = kwargs.get("rel")
@@ -26,11 +25,10 @@ class HTMLLink(HTMLTagBuilder):
         super().__init__("link", is_container=False)
         self.href = kwargs.get("href")
         self.type = kwargs.get("type")
-        self.xml_prop_names += self.__slots__
+        self.xml_prop_names += ["href", "type", "rel"]
 
 
 class HTMLHyperlink(HTMLTagBuilder):
-    __slots__ = ("href")
 
     def __init__(self, *children, **kwargs):
         super().__init__("a", is_container=True, children=children, **kwargs)

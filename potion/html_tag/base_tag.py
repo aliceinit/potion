@@ -4,8 +4,6 @@ from potion.styles import CSSBlock
 
 
 class HTMLTagBuilder:
-    # __slots__ = ("name", "is_container", "children", "html_class", "id", "xml_prop_names",
-    #              "functions", "styles")
 
     def __init__(self, name, is_container=True, children=None, id=None,
                  html_class=None, style=None, on_click=None, **kwargs):

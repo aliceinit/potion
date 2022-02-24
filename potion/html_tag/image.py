@@ -3,8 +3,6 @@ from .base_tag import HTMLTagBuilder
 
 class HTMLImage(HTMLTagBuilder):
 
-    # __slots__ = ("src", "alt")
-
     def __init__(self, **kwargs):
         super().__init__("image", is_container=False, **kwargs)
         self.src = kwargs.get("src")
