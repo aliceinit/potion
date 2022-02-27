@@ -18,7 +18,8 @@ class JQueryAction:
                          "fadeTo",
                          "fadeToggle",
                          "hide",
-                         "show"]
+                         "show",
+                         "toggle"]
 
     def __init__(self, target_selector: str,
                  jquery_action: str,

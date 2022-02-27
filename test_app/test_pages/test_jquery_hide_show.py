@@ -15,7 +15,7 @@ def dashboard():
 
     doc.add_to_body(
         Tag.P("A paragraph"),
-        Tag.P("Another paragrry-slowaph"),
+        Tag.P("Another paragraph"),
         Tag.BUTTON("hide paragraphs",
                    id="hide-button",
                    on_click=JQuery.hide("p")),
@@ -27,7 +27,10 @@ def dashboard():
                    on_click=JQuery.hide("p", speed=2000)),
         Tag.BUTTON("show fast",
                    id="show-fast",
-                   on_click=JQuery.show("p", speed="fast"))
+                   on_click=JQuery.show("p", speed="fast")),
+        Tag.BUTTON("toggle",
+                   id="toggle",
+                   on_click=JQuery.toggle("p"))
     )
     doc.add_stylesheet(href=url_for("static", filename="styles.css"))
 
@@ -59,4 +62,15 @@ def test_jquery_hide_show_with_speed(_driver: Driver):
     assert len(get_visible_paragraphs(_driver)) == 0
 
     _driver.click("#show-fast")
+    assert len(get_visible_paragraphs(_driver)) == 2
+
+
+def test_jquery_toggle(_driver: Driver):
+    _driver.navigate(test_url)
+    assert len(get_visible_paragraphs(_driver)) == 2
+
+    _driver.click("#toggle")
+    assert len(get_visible_paragraphs(_driver)) == 0
+
+    _driver.click("#toggle")
     assert len(get_visible_paragraphs(_driver)) == 2
