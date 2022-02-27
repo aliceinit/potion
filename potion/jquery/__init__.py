@@ -3,6 +3,10 @@ import typing
 from .jquery import JQueryFunctionBuilder, JQuerySelector
 from .hide import jquery_hide_partial
 from .show import jquery_show_partial
+from .fade import (jquery_fadein_partial,
+                   jquery_fadeout_partial,
+                   jquery_fadetoggle_partial,
+                   jquery_fadeto_partial)
 
 
 class JQuery:
@@ -23,3 +27,7 @@ class JQuery:
     # JQuery Function Partials, requiring source-selector + event-name
     hide = jquery_hide_partial
     show = jquery_show_partial
+    fade_in = jquery_fadein_partial
+    fade_out = jquery_fadeout_partial
+    fade_toggle = jquery_fadetoggle_partial
+    fade_to = jquery_fadeto_partial

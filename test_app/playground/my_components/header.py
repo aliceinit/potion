@@ -1,8 +1,5 @@
-from flask import url_for
-from potion.html_doc import HTMLDocBuilder
+from flask import url_for, request
 from potion.html_tag import Tag
-from potion.styles import CSSBlock
-from test_utils.driver import Driver
 from .theme import Theme
 
 
@@ -17,6 +14,9 @@ def header_button(title, href, button_id):
                "background_color": Theme.colors.ACCENT_A_MAIN,
                "color": Theme.colors.ACCENT_A_LIGHT}
     )
+    if request.path == href:
+        a.add_style(background_color=Theme.colors.ACCENT_A_LIGHT,
+                    color=Theme.colors.ACCENT_A_DARK)
     a.add_style(":hover",
                 background_color=Theme.colors.ACCENT_A_LIGHT,
                 color=Theme.colors.ACCENT_A_DARK)

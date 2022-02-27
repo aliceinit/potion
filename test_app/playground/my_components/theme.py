@@ -1,6 +1,3 @@
-from flask import url_for
-
-
 class Colors:
     PRIMARY_MAIN = "#67B600"
     PRIMARY_LIGHT = "#DCEEC8"

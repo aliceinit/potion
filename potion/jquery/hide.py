@@ -7,7 +7,6 @@ class JQueryHide(JQueryFunctionBuilder):
 
     def __init__(self, event: str, source: str, target: str,
                  speed: typing.Union[str, int] = None):
-
         super().__init__(event, source)
 
         args = []

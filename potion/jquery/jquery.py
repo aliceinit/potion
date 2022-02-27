@@ -13,7 +13,12 @@ class JQuerySelector:
 
 
 class JQueryAction:
-    supported_actions = ["show", "hide"]
+    supported_actions = ["fadeIn",
+                         "fadeOut",
+                         "fadeTo",
+                         "fadeToggle",
+                         "hide",
+                         "show"]
 
     def __init__(self, target_selector: str,
                  jquery_action: str,
@@ -31,6 +36,7 @@ class JQueryAction:
             args = ', '.join([str(a) for a in self.args])
         else:
             args = ''
+
         return f"$({self.target}).{self.action}({args})"
 
 
@@ -51,7 +57,7 @@ class JQueryFunctionBuilder:
 
     @staticmethod
     def format_speed_arg(speed):
-        if speed:
+        if speed is not None:
             if speed in ["slow", "fast"]:
                 return f'"{speed}"'
             elif isinstance(speed, int):
