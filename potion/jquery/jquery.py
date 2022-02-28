@@ -13,7 +13,8 @@ class JQuerySelector:
 
 
 class JQueryAction:
-    supported_actions = ["fadeIn",
+    supported_actions = ["animate",
+                         "fadeIn",
                          "fadeOut",
                          "fadeTo",
                          "fadeToggle",

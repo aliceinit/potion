@@ -1,7 +1,6 @@
 from flask import url_for
 from .theme import Theme
 from potion.html_doc import HTMLDocBuilder
-from potion.styles import CSSBlock
 from .header import get_page_header
 
 
@@ -12,7 +11,11 @@ def get_doc_builder(title):
     doc.add_style("body",
                   font_family="'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
                   padding=0,
-                  margin=0)
+                  margin=0,
+                  height="100vh",
+                  width="100vw",
+                  display="flex",
+                  flex_direction="column")
     return doc
 
 

@@ -2,6 +2,7 @@ from flask import Blueprint
 from potion.html_tag import Tag
 
 from .my_components.base import get_doc_with_header
+from .my_components.side_menu import get_menu
 
 playground_api = Blueprint("playground", __name__)
 
@@ -14,8 +15,15 @@ def playground():
     """
     doc = get_doc_with_header("Playground")
     doc.add_to_body(
-        Tag.H2("Playground Main Page"),
-        Tag.P("This is a place to play with the potion library")
+        Tag.DIV(get_menu(),
+                Tag.DIV(
+                    Tag.H2("Playground Main Page"),
+                    Tag.P("This is a place to play with the potion library"),
+                    style={"display": "flex",
+                           "flex-direction": "column",
+                           "padding": "1em"}),
+                style={"display": "flex",
+                       "flex": "1"})
     )
     return doc.build()
 
