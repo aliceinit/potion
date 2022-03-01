@@ -13,17 +13,18 @@ def to_camel_case(text):
 class JQueryAnimate(JQueryFunctionBuilder):
     def __init__(self, event: str, source: str, target: str,
                  params: typing.Dict,
-                 speed: typing.Union[str, int] = None):
+                 speed: typing.Union[str, int] = None,
+                 callback: typing.Callable = None):
         super().__init__(event, source)
 
         args = [{to_camel_case(k): v for k, v in params.items()}]
         if speed:
             args.append(self.format_speed_arg(speed))
-        self.steps = [JQueryAction(target, "animate", *args)]
+        self.steps = [JQueryAction(target, "animate", *args, callback=callback)]
 
 
-def jquery_animate_partial(target_selector: str, params, speed=None):
+def jquery_animate_partial(target_selector: str, params, speed=None, callback=None):
     def partial(event: str, source: str) -> JQueryAnimate:
-        return JQueryAnimate(event, source, target_selector, params, speed)
+        return JQueryAnimate(event, source, target_selector, params, speed, callback=callback)
 
     return partial

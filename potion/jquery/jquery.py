@@ -24,7 +24,8 @@ class JQueryAction:
 
     def __init__(self, target_selector: str,
                  jquery_action: str,
-                 *args):
+                 *args,
+                 callback: typing.Union["JQueryFunctionBuilder", None] = None):
 
         if jquery_action not in self.supported_actions:
             raise AttributeError(f"Invalid JQuery action: {jquery_action}")
@@ -32,14 +33,22 @@ class JQueryAction:
         self.target = JQuerySelector.from_string(target_selector)
         self.action = jquery_action
         self.args = args
+        self.callback = (callback
+                         if isinstance(callback, JQueryFunctionBuilder) or callback is None
+                         else callback("", ""))
 
-    def build(self):
+    def build(self, include_target=True):
         if self.args:
             args = ', '.join([str(a) for a in self.args])
         else:
             args = ''
 
-        return f"$({self.target}).{self.action}({args})"
+        fun = f"$({self.target})" if include_target else ""
+        fun += f".{self.action}({args}"
+        if self.callback:
+            fun += f", function(){{{self.callback.build_steps()}}}"
+        fun += ")"
+        return fun
 
 
 class JQueryFunctionBuilder:
@@ -69,7 +78,12 @@ class JQueryFunctionBuilder:
 
     def build(self):
         fn = f"$({self.source}).{self.event}(function(){{"
-        for step in self.steps:
-            fn += step.build()
+        fn += self.build_steps()
         fn += "});"
         return fn
+
+    def build_steps(self):
+        steps = ""
+        for step in self.steps:
+            steps += step.build()
+        return steps
