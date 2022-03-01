@@ -25,6 +25,6 @@ class JQueryAnimate(JQueryFunctionBuilder):
 
 def jquery_animate_partial(target_selector: str, params, speed=None, callback=None):
     def partial(event: str, source: str) -> JQueryAnimate:
-        return JQueryAnimate(event, source, target_selector, params, speed, callback=callback)
+        return JQueryAnimate(event, source, target_selector, params, speed, callback)
 
     return partial

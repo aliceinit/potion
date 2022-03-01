@@ -20,17 +20,16 @@ def get_menu():
                 id="side-menu-items"),
         Tag.BUTTON(">>",
                    on_click=[
-                       JQuery.animate("#side-menu-panel", {"width": "20%"}, speed=300,
+                       JQuery.animate("#side-menu-panel", {"width": "20%"}, speed=700,
                                       callback=JQuery.show(".menu-title")),
                        JQuery.hide("this"),
                        JQuery.show("#side-menu-collapse-button")
-                       # JQuery.show(".menu-title")
                    ],
                    id="side-menu-expand-button",
                    style={"display": "none"}),
         Tag.BUTTON("<<",
                    on_click=[
-                       JQuery.animate("#side-menu-panel", {"width": "5%"}, speed=300),
+                       JQuery.animate("#side-menu-panel", {"width": "5%"}, speed=700),
                        JQuery.hide("this"),
                        JQuery.hide(".menu-title"),
                        JQuery.show("#side-menu-expand-button")
