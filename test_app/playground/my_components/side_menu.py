@@ -11,11 +11,19 @@ def get_menu():
                 Tag.P("Menu Item 3"),
                 id="side-menu-items"),
         Tag.BUTTON(">>",
-                   on_click=JQuery.animate("#side-menu-panel", {"width": "20%"}, speed=700),
+                   on_click=[
+                       JQuery.animate("#side-menu-panel", {"width": "20%"}, speed=700),
+                       JQuery.hide("this"),
+                       JQuery.show("#side-menu-collapse-button")
+                   ],
                    id="side-menu-expand-button",
                    style={"display": "none"}),
         Tag.BUTTON("<<",
-                   on_click=JQuery.animate("#side-menu-panel", {"width": "5%"}, speed=700),
+                   on_click=[
+                       JQuery.animate("#side-menu-panel", {"width": "5%"}, speed=700),
+                       JQuery.hide("this"),
+                       JQuery.show("#side-menu-expand-button")
+                   ],
                    id="side-menu-collapse-button"),
         id="side-menu-panel")
 

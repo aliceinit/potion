@@ -1,6 +1,9 @@
 import random
 import string
+import typing
+
 from potion.styles import CSSBlock
+from potion.jquery import JQuery
 
 
 class HTMLTagBuilder:
@@ -85,5 +88,16 @@ class HTMLTagBuilder:
             block_selector += f" {selector}"
         self.styles.append(CSSBlock(block_selector, **kwargs))
 
-    def on_click(self, partial_fn):
-        self.functions.append(partial_fn("click", f"#{self.id}"))
+    def on_click(self, partial):
+        """
+        Takes a partial function OR a list of partial functions
+        and calls them with the 'click' event and the current tag's id
+        Adds the resulting JQuery functions to the Tag class's function list
+        :param partial: A function or list of functions that return JQueryFunctions
+        :return: None
+        """
+
+        partial_list = [partial] if callable(partial) else partial
+
+        for fun in partial_list:
+            self.functions.append(fun("click", f"#{self.id}"))
