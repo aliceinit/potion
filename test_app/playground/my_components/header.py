@@ -1,5 +1,5 @@
 from flask import url_for, request
-from potion.html_tag import Tag
+from potion.tags import Tag
 from .theme import Theme
 
 

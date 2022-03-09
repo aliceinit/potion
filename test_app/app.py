@@ -1,6 +1,6 @@
 from flask import Flask
-from potion.html_doc import HTMLDocBuilder
-from potion.html_tag import Tag
+from potion.dom import HTMLDocBuilder
+from potion.tags import Tag
 from playground import playground
 from test_pages import (test_global_css,
                         test_hyperlink_click,

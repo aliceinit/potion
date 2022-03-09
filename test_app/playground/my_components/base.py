@@ -1,6 +1,6 @@
 from flask import url_for
 from .theme import Theme
-from potion.html_doc import HTMLDocBuilder
+from potion.dom import HTMLDocBuilder
 from .header import get_page_header
 
 

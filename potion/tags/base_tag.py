@@ -3,7 +3,6 @@ import string
 import typing
 
 from potion.styles import CSSBlock
-from potion.jquery import JQuery
 
 
 class HTMLTagBuilder:
@@ -76,6 +75,9 @@ class HTMLTagBuilder:
             tag += f"</{self.name}>"
 
         return tag, functions_by_id, styles_by_id
+
+    def add_class(self, class_name):
+        self.html_class.add(class_name)
 
     def add_child(self, child):
         self.children.append(child)

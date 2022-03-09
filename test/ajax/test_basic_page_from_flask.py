@@ -1,6 +1,6 @@
 import pytest
-from potion.html_doc import HTMLDocBuilder
-from potion.html_tag import Tag
+from potion.dom import HTMLDocBuilder
+from potion.tags import Tag
 from potion.styles import CSSBlock
 from bs4 import BeautifulSoup
 

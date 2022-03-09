@@ -1,8 +1,9 @@
 from flask import Blueprint
-from potion.html_tag import Tag
+from potion.tags import Tag
 
 from .my_components.base import get_doc_with_header
 from .my_components.side_menu import get_menu
+from .my_components.content_container import get_content_text, get_content_container
 
 playground_api = Blueprint("playground", __name__)
 
@@ -16,12 +17,7 @@ def playground():
     doc = get_doc_with_header("Playground")
     doc.add_to_body(
         Tag.DIV(get_menu(),
-                Tag.DIV(
-                    Tag.H2("Playground Main Page"),
-                    Tag.P("This is a place to play with the potion library"),
-                    style={"display": "flex",
-                           "flex-direction": "column",
-                           "padding": "1em"}),
+                get_content_container(),
                 style={"display": "flex",
                        "flex": "1"})
     )
@@ -44,3 +40,8 @@ def sample2():
         Tag.H2("Sample 2")
     )
     return doc.build()
+
+
+@playground_api.route("/playground/menu/<menu_selection>")
+def get_content(menu_selection: str):
+    return get_content_text(menu_selection).build()[0]

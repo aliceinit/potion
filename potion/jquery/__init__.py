@@ -1,7 +1,10 @@
 import typing
 
 from .jquery import JQueryFunctionBuilder, JQuerySelector
+from .ajax import (jquery_load_partial)
 from .animate import jquery_animate_partial
+from .css import jquery_css_partial
+from .css_class import (jquery_toggle_class_partial)
 from .hide import (jquery_hide_partial,
                    jquery_show_partial,
                    jquery_toggle_partial)
@@ -29,6 +32,8 @@ class JQuery:
     # JQuery Function Partials, requiring source-selector + event-name
     animate = jquery_animate_partial
 
+    css = jquery_css_partial
+
     hide = jquery_hide_partial
     show = jquery_show_partial
     toggle = jquery_toggle_partial
@@ -37,3 +42,7 @@ class JQuery:
     fade_out = jquery_fadeout_partial
     fade_toggle = jquery_fadetoggle_partial
     fade_to = jquery_fadeto_partial
+
+    load = jquery_load_partial
+
+    toggle_class = jquery_toggle_class_partial

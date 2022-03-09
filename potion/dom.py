@@ -1,4 +1,4 @@
-from potion.html_tag import HTMLTagBuilder, Tag
+from potion.tags import HTMLTagBuilder, Tag
 from potion.jquery import JQuery, JQueryFunctionBuilder
 from potion.styles import CSSBlock
 from bs4 import BeautifulSoup

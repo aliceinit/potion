@@ -1,6 +1,6 @@
 from flask import Blueprint
-from potion.html_tag import Tag
-from potion.html_doc import HTMLDocBuilder
+from potion.tags import Tag
+from potion.dom import HTMLDocBuilder
 from potion.jquery import JQuery
 from test_utils.driver import Driver
 import time

@@ -1,6 +1,6 @@
 from flask import Blueprint, url_for
-from potion.html_tag import Tag
-from potion.html_doc import HTMLDocBuilder
+from potion.tags import Tag
+from potion.dom import HTMLDocBuilder
 from test_utils.driver import Driver
 
 test_api = Blueprint("test-global-css", __name__)

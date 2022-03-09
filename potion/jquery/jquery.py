@@ -14,13 +14,16 @@ class JQuerySelector:
 
 class JQueryAction:
     supported_actions = ["animate",
+                         "css",
                          "fadeIn",
                          "fadeOut",
                          "fadeTo",
                          "fadeToggle",
                          "hide",
+                         "load",
                          "show",
-                         "toggle"]
+                         "toggle",
+                         "toggleClass"]
 
     def __init__(self, target_selector: str,
                  jquery_action: str,
